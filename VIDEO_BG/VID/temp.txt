@@ -1,1 +1,1 @@
-This directory contains video file (2.mov)
+This directory contains video file (2.mov). Not added coz large size

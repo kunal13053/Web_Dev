@@ -1,0 +1,16 @@
+High level
+Interpreted Prog language
+ECMAScript
+Multi-paradigm(can write different in different paradigms)
+Runs on client/browser as well as on the server(Node.js)
+--------------
+WHY JS?
+=>prog language of the browser,
+Can build very user interactive with frameworks
+building very fast servers and full stack apps
+used in mobiles apps
+used in desktop app development
+----------------------
+JS visual studio shortcuts
+clg
+ce 

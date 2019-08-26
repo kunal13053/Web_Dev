@@ -13,8 +13,9 @@ if(isset($_POST['name'])){
     $query = "INSERT INTO user(name) VALUES('$name')";
 
     if(mysqli_query($conn, $query)){
-        echo 'User Added...'
-    } else{
+        echo 'User Added...';
+    }
+    else{
         echo 'ERROR: '. mysqli_error($conn); 
     }
 

@@ -8,12 +8,25 @@
   </head>
   <body>
     <button id="getText">Get Text</button>
-
+    <div id="output"></div>
     <script>
       document.getElementById('getText').addEventListener('click', getText);
 
       function getText() {
-        fetch('');
+        // fetch('sample.txt') //return a promise
+        //   .then(function(res) {
+        //     return res.text();
+        //   })
+        //   .then(function(data) {
+        //     console.log(data);
+        //   });
+
+//      Using arrow function
+        fetch('sample.txt')
+          .then(res => res.text())
+          .then(data => {
+            document.getElementById('output').innerHTML = data;
+          });
       }
     </script>
   </body>

@@ -1,9 +1,9 @@
-const url = '../docs/pdf.pdf'; //url of pdf
+const url = './docs/pdf.pdf'; //url of pdf
 
 // Global variables
 let pdfDoc = null,
   pageNum = 1, //start form first page
-  pageIsRendering = false, //
+  pageIsRendering = false,
   pageNumIsPending = null;
 
 const scale = 1.5,
@@ -11,19 +11,80 @@ const scale = 1.5,
   ctx = canvas.getContext('2d'); // putting the pdf in the canvas
 
 // Render the page
-const renderPage = num => {};
+const renderPage = num => {
+  pageIsRendering = true;
+  // Get page
+  pdfDoc.getPage(num).then(page => {
+    // Set Scale
+    const viewport = page.getViewport({ scale });
+    canvas.height = viewport.height;
+    canvas.width = viewport.width;
+
+    const renderCtx = {
+      canvasContext: ctx,
+      viewport
+    };
+    page.render(renderCtx).promise.then(() => {
+      pageIsRendering = false;
+
+      if (pageNumIsPending != null) {
+        renderPage(pageNumIsPending);
+        pageNumIsPending = null;
+      }
+    });
+
+    // Output current page
+    document.querySelector('#page-num').textContent = num;
+  });
+};
+
+// Check for pages rendering
+const queueRenderPage = num => {
+  if (pageIsRendering) {
+    pageNumIsPending = num;
+  } else {
+    renderPage(num);
+  }
+};
+
+// Show Previous page
+const showPrevPage = () => {
+  if (pageNum <= 1) {
+    return;
+  }
+  pageNum--;
+  queueRenderPage(pageNum);
+};
+
+// Show Next page
+const showNextPage = () => {
+  if (pageNum >= pdfDoc.numPages) {
+    return;
+  }
+  pageNum++;
+  queueRenderPage(pageNum);
+};
 
 // Get Document(using pdfjsLib object of pdf.js API)
-pdfjsLib.getDocument(url).promise.then(pdfDoc_ => {
-  pdfDoc = pdfDoc_;
-  console.log(pdfDoc);
-});
+pdfjsLib
+  .getDocument(url)
+  .promise.then(pdfDoc_ => {
+    pdfDoc = pdfDoc_;
 
-// Error: fetch_stream.js:110 GET http://127.0.0.1:5500/docs/pdf.pdf 404 (Not Found)
-// PDFFetchStreamReader @ fetch_stream.js:110
-// getFullReader @ fetch_stream.js:53
-// (anonymous) @ api.js:1878
-// (anonymous) @ message_handler.js:317
-// _createStreamSink @ message_handler.js:316
-// MessageHandler._onComObjOnMessage @ message_handler.js:116
-// index.html:1 Uncaught (in promise) MissingPDFException {name: "MissingPDFException", message: "Missing PDF "http://127.0.0.1:5500/docs/pdf.pdf"."}
+    document.querySelector('#page-count').textContent = pdfDoc.numPages;
+
+    renderPage(pageNum);
+  })
+  .catch(err => {
+    // Display error
+    const div = document.createElement('div');
+    div.className = 'error';
+    div.appendChild(document.createTextNode(err.message));
+    document.querySelector('body').insertBefore(div, canvas);
+    // Remove top bar
+    document.querySelector('.top-bar').style.display = 'none';
+  });
+
+// Button Events
+document.querySelector('#prev-page').addEventListener('click', showPrevPage);
+document.querySelector('#next-page').addEventListener('click', showNextPage);

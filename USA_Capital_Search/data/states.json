@@ -1,5 +1,13 @@
 [
   {
+    
+    "abbr": null,
+    "name": null,
+    "capital": null,
+    "lat": null,
+    "long": null
+  },
+  {
     "abbr": "AL",
     "name": "Alabama",
     "capital": "Montgomery",

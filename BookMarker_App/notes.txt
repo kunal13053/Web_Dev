@@ -1,0 +1,15 @@
+Local Storage:
+There is not any special library for local storage. 
+Local storage is the part of HTML5 standard
+
+Some js functions for localStorage:
+localStorage.setItem('key', 'value');
+localStorage.getItem('key);
+localStorage.removeItem('key);
+
+-> To access local storage in the browser:
+open console-> open application tab-> select storage->select local storage-> There you can see all the key value pairs of the local storage
+
+-> IMPORTANT JSON array functions:
+JSON.stringify() : will turn JSON into stringify
+JSON.parse() : will turn string back to JSON

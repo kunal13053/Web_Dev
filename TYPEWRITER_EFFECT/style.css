@@ -28,7 +28,12 @@ h1 {
 
 h2 {
   font-size: 2rem;
-  color: #ccc;
+  color: rgb(235, 227, 227);
+}
+
+/* Cursor */
+.txt-type > .txt {
+  border-right: 0.2rem solid #777;
 }
 
 @media (min-width: 1200px) {

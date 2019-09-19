@@ -82,6 +82,7 @@ img {
     top: 50%;
     right: 0;
     transform: translate(-50%, -50%);
+    padding: 0.5rem;
 }
 
 .showcase-content {
@@ -151,6 +152,18 @@ img {
     padding: 3rem 0;
     background: 1rem;
     color: #fff;
+}
+
+/* Hide Content initially  */
+#tab-1-content,
+#tab-2-content,
+#tab-3-content {
+    display: none;
+}
+
+.show {
+    display: block !important;
+    /*important means always work*/
 }
 
 #tab-1-content .tab-1-content-inner {
@@ -300,6 +313,10 @@ img {
     font-size: 1rem;
     padding: 0.8rem 1.3rem;
     text-transform: uppercase;
+}
+
+.btn-icon {
+    margin-left: 1rem;
 }
 
 @media(max-width: 960px) {

@@ -1,5 +1,5 @@
-# WebDevPractice
-I made this repo to keep track of my web dev side projects.
+# WebDevProjects
+I made this repo to keep track of my web dev projects.
 This repo contains code I did while learning Web Development.
 
 
